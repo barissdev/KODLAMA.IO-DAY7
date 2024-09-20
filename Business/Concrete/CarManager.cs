@@ -1,8 +1,9 @@
 using DataAccess;
 using Entities;
+using System;
 using System.Collections.Generic;
 
-namespace Business
+namespace Business.Concrete
 {
     public class CarManager : ICarService
     {
@@ -25,6 +26,16 @@ namespace Business
 
         public void Add(Car car)
         {
+            if (car.Description.Length < 2)
+            {
+                throw new Exception("Araba ismi en az 2 karakter olmalıdır.");
+            }
+
+            if (car.DailyPrice <= 0)
+            {
+                throw new Exception("Araba günlük fiyatı 0'dan büyük olmalıdır.");
+            }
+
             _carDal.Add(car);
         }
 
@@ -36,6 +47,16 @@ namespace Business
         public void Delete(Car car)
         {
             _carDal.Delete(car);
+        }
+
+        public List<Car> GetCarsByBrandId(int brandId)
+        {
+            return _carDal.GetAll(c => c.BrandId == brandId);
+        }
+
+        public List<Car> GetCarsByColorId(int colorId)
+        {
+            return _carDal.GetAll(c => c.ColorId == colorId);
         }
     }
 }

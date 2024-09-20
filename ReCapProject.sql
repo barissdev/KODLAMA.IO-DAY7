@@ -1,0 +1,20 @@
+CREATE DATABASE CarRentalDB;
+
+CREATE TABLE Cars (
+    Id INT PRIMARY KEY IDENTITY,
+    BrandId INT,
+    ColorId INT,
+    ModelYear INT,
+    DailyPrice DECIMAL(18, 2),
+    Description NVARCHAR(250)
+);
+
+CREATE TABLE Brands (
+    Id INT PRIMARY KEY IDENTITY,
+    Name NVARCHAR(100)
+);
+
+CREATE TABLE Colors (
+    Id INT PRIMARY KEY IDENTITY,
+    Name NVARCHAR(100)
+);
